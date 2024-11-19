@@ -5,6 +5,7 @@
 # 下準備
 git clone https://github.com/synquery/synquery-bootstrap.git
 npm i -g yarn
+npm i -g shx
 mv synquery-bootstrap .sb
 cd .sb
 npm i
@@ -18,6 +19,7 @@ yarn add st
 yarn add -D @parcel/optimizer-data-url 
 yarn add -D @parcel/transformer-inline-string
 yarn add -D @parcel/transformer-sass
-echo '{ "minifySvg": false }' > .htmlnanorc
-mkdir src; echo "<html><head></head><body><div> HELLO, WORLD! </div><script>console.log('HELLO, WORLD!');</script></body></html>" > src/index.html
+shx echo '{ "minifySvg": false }' > .htmlnanorc
+shx mkdir src; 
+shx echo "<html><head></head><body><div> HELLO, WORLD! </div><script>console.log('HELLO, WORLD!');</script></body></html>" > src/index.html
 node .sb/cmd/setup.js
