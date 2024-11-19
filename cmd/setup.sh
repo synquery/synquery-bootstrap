@@ -6,6 +6,7 @@
 git clone https://github.com/synquery/synquery-bootstrap.git
 npm i -g yarn
 npm i -g shx
+shx rm -Rf .sb .htmlnanorc
 shx mv synquery-bootstrap .sb
 shx cd .sb
 npm i
