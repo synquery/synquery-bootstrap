@@ -56,8 +56,8 @@ npm install synquery-bootstrap
 
 Or to install the latest version(requires shx):  
 ```sh
-curl -o- https://raw.githubusercontent.com/synquery/synquery-bootstrap/cmd/setup.sh | bash
+curl -o- https://raw.githubusercontent.com/synquery/synquery-bootstrap/refs/heads/main/cmd/setup.sh | bash
 ```
 ```sh
-wget -qO- https://raw.githubusercontent.com/synquery/synquery-bootstrap/cmd/setup.sh | bash
+wget -qO- https://raw.githubusercontent.com/synquery/synquery-bootstrap/refs/heads/main/cmd/setup.sh | bash
 ```
