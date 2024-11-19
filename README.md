@@ -1,7 +1,7 @@
 <a href="https://github.com/synquery/logos">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/synquery/logos/HEAD/synquery-web-patform.png" />
-    <img src="https://raw.githubusercontent.com/synquery/logos/HEAD/synquery-web-patform.png" height="50" alt="synquery project logo" />
+    <source media="(prefers-color-scheme: dark)" srcset="https://github.com/synquery/logos/blob/4d523a4dc1a6115979a051cdc3e18d3294836968/synquery-web-platform.png" />
+    <img src="https://github.com/synquery/logos/blob/4d523a4dc1a6115979a051cdc3e18d3294836968/synquery-web-platform.png" height="50" alt="synquery project logo" />
   </picture>
 </a>
 

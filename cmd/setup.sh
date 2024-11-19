@@ -6,10 +6,10 @@
 git clone https://github.com/synquery/synquery-bootstrap.git
 npm i -g yarn
 npm i -g shx
-mv synquery-bootstrap .sb
-cd .sb
+shx mv synquery-bootstrap .sb
+shx cd .sb
 npm i
-cd ..
+shx cd ..
 # セットアップ本文
 yarn init -y
 yarn add -D parcel

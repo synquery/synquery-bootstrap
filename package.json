@@ -1,0 +1,24 @@
+{
+  "name": "synquery-bootstrap",
+  "version": "0.0.1",
+  "description": "Command line tools for developing applications on Synquery web-platform.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/synquery/synquery-bootstrap.git"
+  },
+  "keywords": [
+    "synquery",
+    "bootstrap",
+    "command-line-tools"
+  ],
+  "author": "Synquery Team",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/synquery/synquery-bootstrap/issues"
+  },
+  "homepage": "https://github.com/synquery/synquery-bootstrap#readme"
+}
