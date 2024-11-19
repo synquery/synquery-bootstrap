@@ -5,7 +5,8 @@
 const fs = require('fs');
 (()=>{
   
-  const pkgjson = require(`${process.cwd()}/package.json`);
+  const filepath = `${process.cwd()}/package.json`;
+  const pkgjson = require(filepath);
   pkgjson['_main_' ] = pkgjson.main;
   delete pkgjson.main;
   pkgjson['scripts'] = {
@@ -14,6 +15,7 @@ const fs = require('fs');
     "build": "rm -Rf dist; npx parcel build src/index.html --no-cache --no-source-maps;",
     "st": "st -nc"
   };
+  fs.writeFileSync(filepath, JSON.stringify(pkgjson, null, '  '));
   console.log(`[synquery-bootstrap]✨ Let's run: ✨ npm run parcel-hmr`);
   
 })();
