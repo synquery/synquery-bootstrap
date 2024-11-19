@@ -5,7 +5,7 @@
 const fs = require('fs');
 (()=>{
   
-  const pkgjson = require('./package.json');
+  const pkgjson = require(`${process.cwd()}/package.json`);
   pkgjson['_main_' ] = pkgjson.main;
   delete pkgjson.main;
   pkgjson['scripts'] = {
@@ -14,6 +14,6 @@ const fs = require('fs');
     "build": "rm -Rf dist; npx parcel build src/index.html --no-cache --no-source-maps;",
     "st": "st -nc"
   };
-  console.log('Ready to run: npm run parcel-hmr');
+  console.log(`[synquery-bootstrap]✨ Let's run: ✨ npm run parcel-hmr`);
   
 })();
