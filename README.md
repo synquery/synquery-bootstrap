@@ -6,7 +6,7 @@
 </a>
 
 
-# Synquery Bootstrap [![Build Status](https://app.travis-ci.com/synquery/synquery-bootstrap.svg?branch=master)] [![synquery-bootstrap version](https://img.shields.io/badge/version-v0.0.1-yellow.svg)]
+# Synquery Bootstrap ![Build Status](https://app.travis-ci.com/synquery/synquery-bootstrap.svg?branch=master) ![synquery-bootstrap version](https://img.shields.io/badge/version-v0.0.1-yellow.svg)
 
 <!-- To update this table of contents, ensure you have run `npm install` then `npm run doctoc` -->
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
