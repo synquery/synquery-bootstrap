@@ -16,6 +16,6 @@ const fs = require('fs');
     "st": "st -nc"
   };
   fs.writeFileSync(filepath, JSON.stringify(pkgjson, null, '  '));
-  console.log(`[synquery-bootstrap]✨ Let's run: ✨ npm run parcel-hmr`);
+  console.log(`[synquery-bootstrap] Let's run✨npm run parcel-hmr`);
   
 })();

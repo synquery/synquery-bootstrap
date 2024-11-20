@@ -6,11 +6,13 @@
 git clone https://github.com/synquery/synquery-bootstrap.git
 npm i -g yarn
 npm i -g shx
+npm i foonyah-ci
 shx rm -Rf .sb .htmlnanorc
 shx mv synquery-bootstrap .sb
-shx cd .sb
+# Warning: shx cd is not supported
+cd .sb
 npm i
-shx cd ..
+cd ..
 # セットアップ本文
 yarn init -y
 yarn add -D parcel
