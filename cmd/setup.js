@@ -4,10 +4,10 @@
  */
 const fs = require('fs');
 (()=>{
-  
+
   const filepath = `${process.cwd()}/package.json`;
   const pkgjson = require(filepath);
-  pkgjson['_main_' ] = pkgjson.main;
+  pkgjson[ '_main_' ] = pkgjson.main;
   delete pkgjson.main;
   pkgjson['scripts'] = {
     "parcel": "npx parcel src/index.html --no-cache --no-hmr", 
@@ -16,6 +16,6 @@ const fs = require('fs');
     "st": "st -nc"
   };
   fs.writeFileSync(filepath, JSON.stringify(pkgjson, null, '  '));
-  console.log(`[synquery-bootstrap] Let's run✨npm run parcel-hmr`);
-  
+  console.log(`[synquery-bootstrap] Let's run✨ npm run parcel-hmr`);
+
 })();
