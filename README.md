@@ -34,7 +34,7 @@ Simple as that!
 
 `synquery-bootstrap` also provides convenience tools for building Single-Session Application:
 
-** 1. HTML replacer **
+**1. HTML replacer**
 ```sh
 # change parcel absolute paths to relative
 $ node .sb/etc/replacer.js relativize -a
