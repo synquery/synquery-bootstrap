@@ -46,6 +46,13 @@ $ node .sb/etc/replacer.js add -a head content-type "<meta http-equiv=\"Content-
 $ node .sb/etc/replacer.js del head meta,content-type
 ```
 
+## Synquery web-platform technology basis
+
+- [Node.js](https://nodejs.org/)
+- [Mongodb](https://www.mongodb.com/)
+- [Yarn package manager](https://yarnpkg.com/cli/install)
+- [Parcel](https://parceljs.org/)
+- [Foonyah CI](https://github.com/ystskm/foonyah-ci/)
 
 ## About
 synquery-bootstrap needs the well-known javascript runtime [node.js](https://nodejs.org/en/). We recommend to install [nvm](https://github.com/nvm-sh/nvm) before installing this module.
