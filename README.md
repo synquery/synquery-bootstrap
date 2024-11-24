@@ -32,6 +32,20 @@ Now ready to execute \#project_id
 
 Simple as that!
 
+`synquery-bootstrap` also provides convenience tools for building Single-Session Application:
+
+** 1. HTML replacer **
+```sh
+# change parcel absolute paths to relative
+$ node .sb/etc/replacer.js relativize -a
+
+# add or modify html node in bulk
+$ node .sb/etc/replacer.js add -a head content-type "<meta http-equiv=\"Content-Type\" content=\"text/html;charset=utf-8\">"
+
+# delete html node in bulk
+$ node .sb/etc/replacer.js del head meta,content-type
+```
+
 
 ## About
 synquery-bootstrap needs the well-known javascript runtime [node.js](https://nodejs.org/en/). We recommend to install [nvm](https://github.com/nvm-sh/nvm) before installing this module.
