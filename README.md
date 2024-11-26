@@ -52,7 +52,7 @@ $ node .sb/etc/replacer.js del head meta,content-type
 - [Mongodb](https://www.mongodb.com/)
 - [Yarn package manager](https://yarnpkg.com/cli/install)
 - [Parcel](https://parceljs.org/)
-- [Foonyah CI](https://github.com/ystskm/foonyah-ci/)
+- [Foonyah CI](https://github.com/ystskm/foonyah-ci/) - A CI oriented testing tool for npm packaged project
 
 ## About
 synquery-bootstrap needs the well-known javascript runtime [node.js](https://nodejs.org/en/). We recommend to install [nvm](https://github.com/nvm-sh/nvm) before installing this module.

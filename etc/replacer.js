@@ -13,8 +13,8 @@
   if(!fs.existsSync(`${packdir}/package.json`)) {
     throw '(replacer.js) Must run at the project root with package.json!';
   }
-  const config = Object.assign({ distdir: 'dist' }, require(`${packdir}/package.json`).sb_replacer || { });
-  const distdir = path.resolve(packdir, config.distdir);
+  const config = Object.assign({ opdir: 'dist' }, require(`${packdir}/package.json`).sb_replacer || { });
+  const opdir = path.resolve(packdir, process.env.opdir || config.opdir);
   const amode = argv[0] == '-a';
   const Ops = {
     // parcel build で絶対パスになったものを相対パスに置き換える
@@ -28,7 +28,7 @@
   if(!fnc) {
     console.log(`No such operation: ${op}`);
   }
-  Op_multi(distdir, fnc, { amode }).then(()=>{
+  Op_multi(opdir, fnc, { amode }).then(()=>{
     console.log(`Finished operation: ${op}`);
   });
   return;
@@ -174,7 +174,7 @@
   }
   
   async function Op_mkDdir(pathname) {
-    const pathdir = path.resolve(distdir, pathname);
+    const pathdir = path.resolve(opdir, pathname);
     return new Promise((rsl, rej)=>fs.mkdir(pathdir, { recursive: true }, (er, rd)=>{ 
       if(er) console.log('[Warn](Op_mkDir)', er); rsl();
     }));
