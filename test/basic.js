@@ -21,7 +21,7 @@
       t.done();
     },
     'relativize': t=>{
-      execTest('relativize -a');
+      execTest('relativize');
       const doc1 = parseHTML('index-test1.html').doc;
       t.equals(doc1.querySelector('link').getAttribute('href'), './assets/css/styles.fc4ed811.css', 'index-test1 ok');
       const doc2 = parseHTML('index-test2.html').doc;
@@ -31,7 +31,7 @@
       t.done();
     },
     'add_head': t=>{
-      execTest(`add -a head content-type "<meta http-equiv=\\"Content-Type\\" content=\\"text/svg\\"/>"`);
+      execTest(`add head content-type "<meta http-equiv=\\"Content-Type\\" content=\\"text/svg\\"/>"`);
       const doc1 = parseHTML('index-test1.html').doc;
       t.equals(doc1.querySelector('meta').getAttribute('content'), 'text/svg', 'index-test1 ok');
       const doc2 = parseHTML('index-test2.html').doc;
@@ -41,7 +41,7 @@
       t.done();
     },
     'add_body': t=>{
-      execTest(`add -a body b2 "<script src=\\"b3.js\\"></script>"`);
+      execTest(`add body b2 "<script src=\\"b3.js\\"></script>"`);
       const doc1 = parseHTML('index-test1.html').doc;
       t.equals(doc1.querySelector('script[src=b2\\.js]'), NULL, 'index-test1-b2 ok');
       t.equals(Array.from(doc1.querySelectorAll('script[src]')).at(-1).getAttribute('src'), 'b3.js', 'index-test1-b3 ok');
@@ -54,7 +54,7 @@
       t.done();
     },
     'del_head': t=>{
-      execTest(`del -a head script,a2`);
+      execTest(`del head script,a2`);
       const doc1 = parseHTML('index-test1.html').doc;
       t.ok(doc1.querySelector('script[src=a1\\.js]') != NULL, 'index-test1-a1 ok');
       t.ok(doc1.querySelector('script[src=a2\\.js]') == NULL, 'index-test1-a2 ok');
@@ -67,7 +67,7 @@
       t.done();
     },
     'del_body': t=>{
-      execTest(`del -a body script,b1`);
+      execTest(`del body script,b1`);
       const doc1 = parseHTML('index-test1.html').doc;
       t.ok(doc1.querySelector('script[src=a1\\.js]') != NULL, 'index-test1-a1 ok (not changed)');
       t.ok(doc1.querySelector('script[src=a2\\.js]') == NULL, 'index-test1-a2 ok (not changed)');
@@ -94,7 +94,7 @@
     
   // ---
   function execTest(args) {
-    const rd = cp.execSync(`node ./etc/replacer.js ${args}`, { stdio: [ 'pipe', 'pipe', 'pipe' ] });
+    const rd = cp.execSync(`node ./etc/replacer.js -a -d test/tmp ${args}`, { stdio: [ 'pipe', 'pipe', 'pipe' ] });
     console.log(rd.toString());
   }
   function parseHTML(fnam) {

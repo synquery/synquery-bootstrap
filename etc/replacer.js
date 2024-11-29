@@ -6,16 +6,32 @@
   
   const NULL = null, TRUE = true, FALSE = false, UNDEF = undefined;
   const path = require('path'), fs = require('fs');
+  
+  const argv = require('argv');
+  argv.option([ {
+    name: 'all',
+    short: 'a',
+    type: 'boolean',
+    description: 'ディレクトリ内部ファイル全体を一括処理したい場合に指定する'
+  }, {
+    name: 'opdir',
+    short: 'd',
+    type: 'string',
+    description: '操作するディレクトリを取得する'
+  }]);
+  
   const jsdom = require("jsdom");
-  const argv = process.argv.slice(2);  
-  const op = argv.shift();
+  const { targets, options } = argv.run(); 
+  console.log(targets, options);
+  
+  const op = targets.shift();
   const packdir = process.cwd()
   if(!fs.existsSync(`${packdir}/package.json`)) {
     throw '(replacer.js) Must run at the project root with package.json!';
   }
-  const config = Object.assign({ opdir: 'dist' }, require(`${packdir}/package.json`).sb_replacer || { });
-  const opdir = path.resolve(packdir, process.env.opdir || config.opdir);
-  const amode = argv[0] == '-a';
+  const config = Object.assign({  }, require(`${packdir}/package.json`).sb_replacer || { });
+  const opdir = path.resolve(packdir, options.opdir || config.opdir || 'dist');
+  const amode = options['all'];
   const Ops = {
     // parcel build で絶対パスになったものを相対パスに置き換える
     relativize: Op_relativize,
@@ -38,12 +54,10 @@
     const opts = Object.assign({  }, options);
     console.log(`(replacer.js) searching directory: ${srcdir}`);
     return Promise.resolve().then(()=>{
-      const argv4 = argv.shift();
       if(opts.amode) {
-        // argv4 == "-a"
         return fs.readdirSync(srcdir);
       } else {
-        return [ argv4 ];
+        return [ targets.shift() ];
       }
     }).then(a=>{
       let fileWhen = Promise.resolve();
@@ -95,8 +109,8 @@
    */
   async function Op_add(str, options) {
     const opts = Object.assign({ }, options);
-    const pos = argv[0].trim(), kwd = argv[1].split(',').filter(t=>!!t.trim());
-    const add = argv[2].trim(), tag = add.split(/\s/)[0].substring(1);
+    const pos = targets[0].trim(), kwd = targets[1].split(',').filter(t=>!!t.trim());
+    const add = targets[2].trim(), tag = add.split(/\s/)[0].substring(1);
     return Promise.resolve().then(()=>{
       if(pos.length == 0) {
         throw 'Position name is not specified.';
@@ -140,7 +154,7 @@
    */
   async function Op_del(str, options) {
     const opts = Object.assign({ }, options); 
-    const pos = argv[0].trim(), kwd = argv[1].split(',').filter(t=>!!t.trim());
+    const pos = targets[0].trim(), kwd = targets[1].split(',').filter(t=>!!t.trim());
     const tag = kwd.shift().trim() || '';
     return Promise.resolve().then(()=>{
       if(pos.length == 0) {
