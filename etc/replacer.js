@@ -6,11 +6,11 @@
   
   const NULL = null, TRUE = true, FALSE = false, UNDEF = undefined;
   const path = require('path'), fs = require('fs');
-  
+
   const argv = require('argv');
   argv.option([ {
     name: 'all',
-    short: 'a',
+    short: 'A',
     type: 'boolean',
     description: 'ディレクトリ内部ファイル全体を一括処理したい場合に指定する'
   }, {
@@ -19,7 +19,7 @@
     type: 'string',
     description: '操作するディレクトリを取得する'
   }]);
-  
+
   const jsdom = require("jsdom");
   const { targets, options } = argv.run(); 
   console.log(targets, options);
@@ -88,7 +88,7 @@
   /**
    * parcel build で絶対パスになったものを相対パスに置き換える
    * また parcel 中は : で区切っていた相対パスを / に置き換える。 => foonyah ではディレクトリ形式でアクセスできる。
-   * e.g.) node .sb/etc/replacer.js relativize -a
+   * e.g.) node .sb/etc/replacer.js relativize -A
    */
   async function Op_relativize(str, options) {
     const opts = Object.assign({ }, options);
@@ -105,7 +105,7 @@
   /**
    * タグを追加する、入れ替える
    * ヒットした場合はその次の場所に入れることで、
-   * e.g.) node .sb/etc/replacer.js add -a head content-type "<meta http-equiv=\"Content-Type\" content=\"text/html;charset=utf-8\">"
+   * e.g.) node .sb/etc/replacer.js add -A head content-type "<meta http-equiv=\"Content-Type\" content=\"text/html;charset=utf-8\">"
    */
   async function Op_add(str, options) {
     const opts = Object.assign({ }, options);
@@ -150,7 +150,7 @@
   
   /**
    * タグを削除する
-   * e.g.) node .sb/etc/replacer.js del head meta,content-type
+   * e.g.) node .sb/etc/replacer.js del -A head meta,content-type
    */
   async function Op_del(str, options) {
     const opts = Object.assign({ }, options); 

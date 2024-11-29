@@ -94,7 +94,7 @@
     
   // ---
   function execTest(args) {
-    const rd = cp.execSync(`node ./etc/replacer.js -a -d test/tmp ${args}`, { stdio: [ 'pipe', 'pipe', 'pipe' ] });
+    const rd = cp.execSync(`node ./etc/replacer.js -A -d test/tmp ${args}`, { stdio: [ 'pipe', 'pipe', 'pipe' ] });
     console.log(rd.toString());
   }
   function parseHTML(fnam) {

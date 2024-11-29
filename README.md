@@ -37,13 +37,13 @@ Simple as that!
 **1. HTML replacer**
 ```sh
 # change parcel absolute paths to relative
-$ node .sb/etc/replacer.js relativize -a
+$ node .sb/etc/replacer.js relativize -A
 
 # add or modify html node in bulk
-$ node .sb/etc/replacer.js add -a head content-type "<meta http-equiv=\"Content-Type\" content=\"text/html;charset=utf-8\">"
+$ node .sb/etc/replacer.js add -A head content-type "<meta http-equiv=\"Content-Type\" content=\"text/html;charset=utf-8\">"
 
 # delete html node in bulk
-$ node .sb/etc/replacer.js del head meta,content-type
+$ node .sb/etc/replacer.js del -A head meta,content-type
 ```
 
 ## Synquery web-platform technology basis
