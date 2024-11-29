@@ -121,7 +121,7 @@
       if(kwd.length == 0) {
         throw `Keywords must be specified at least 1.`;
       }
-      const win = (new jsdom.JSDOM(str)).window, doc = win.document;
+      const win = (new jsdom.JSDOM(str, { contentType: 'text/html' })).window, doc = win.document;
       const pEl = doc.querySelector(pos);
       const can = Array.from(pEl.children).filter(el=>{
         if(el.tagName.toLowerCase() != tag.toLowerCase()) {
@@ -166,7 +166,7 @@
       if(kwd.length == 0) {
         throw `Keywords must be specified at least 1.`;
       }
-      const win = (new jsdom.JSDOM(str)).window, doc = win.document;
+      const win = (new jsdom.JSDOM(str, { contentType: 'text/html' })).window, doc = win.document;
       const pEl = doc.querySelector(pos);
       const can = Array.from(pEl.children).filter(el=>{
         if(el.tagName.toLowerCase() != tag.toLowerCase()) {
