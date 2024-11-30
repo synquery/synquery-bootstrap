@@ -128,11 +128,12 @@
           return;
         }
         const s = el.outerHTML;
-        return kwd.filter(kw=>new RegExp(kw, 'i').test(s)).length != 0;
+        // キーワードはアンド検索なので、全てが見つかるもののみを残す
+        return kwd.filter(kw=>!new RegExp(kw, 'i').test(s)).length == 0;
       });
       // console.log('Op_add can?', can, 'pos?', pos, 'add?', add);
       if(can.length > 1) {
-        throw `Too many matched elements for tag: ${tag} and keywords: ${kwd.join(',')}`;
+        throw `Too many matched elements for tag: ${tag} and keywords: ${kwd.join(',')} (n=${can.length})`;
       }
       const addEls = new win.DOMParser().parseFromString(add, 'text/xml').children;
       if(can.length) {
@@ -173,11 +174,12 @@
           return;
         }
         const s = el.outerHTML;
-        return kwd.filter(kw=>new RegExp(kw, 'i').test(s)).length != 0;
+        // キーワードはアンド検索なので、全てが見つかるもののみを残す
+        return kwd.filter(kw=>!new RegExp(kw, 'i').test(s)).length == 0;
       });
       // console.log('Op_del can?', can, 'pos?', pos);
       if(can.length > 1) {
-        throw `Too many matched elements for tag: ${tag} and keywords: ${kwd.join(',')}`;
+        throw `Too many matched elements for tag: ${tag} and keywords: ${kwd.join(',')} (n=${can.length})`;
       }
       can.forEach(el => el.remove());
       return replaceHTML(str, pos, doc[pos].innerHTML);
