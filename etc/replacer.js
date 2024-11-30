@@ -18,11 +18,26 @@
     short: 'd',
     type: 'string',
     description: '操作するディレクトリを取得する'
+  }, {
+    name: 'verbose',
+    sort: 'v',
+    type: 'boolean',
+    description: '処理途中の詳細ログを標準出力する'
+  }, {
+    name: 'quiet',
+    short: 'q',
+    type: 'boolean',
+    description: '処理途中の情報ログを停止する'
   }]);
 
   const jsdom = require("jsdom");
-  const { targets, options } = argv.run(); 
-  console.log(targets, options);
+  const { targets, options } = argv.run();
+  const Log = {
+    i: options.quiet   ? Function(): outLog,
+    d: options.verbose ? outLog: Function(),
+    e: outLog
+  }
+  Log.d('Given parameters?', targets, options);
   
   const op = targets.shift();
   const packdir = process.cwd()
@@ -42,17 +57,18 @@
   };
   const fnc = Ops[op];
   if(!fnc) {
-    console.log(`No such operation: ${op}`);
+    Log.e(`No such operation: ${op}`);
+    return;
   }
   Op_multi(opdir, fnc, { amode }).then(()=>{
-    console.log(`Finished operation: ${op}`);
+    Log.i(`Finished operation: ${op}`);
   });
   return;
   // <-- END-OF-MAIN <--
   
   async function Op_multi(srcdir, proc, options) {
     const opts = Object.assign({  }, options);
-    console.log(`(replacer.js) searching directory: ${srcdir}`);
+    Log.i(`searching directory: ${srcdir}`);
     return Promise.resolve().then(()=>{
       if(opts.amode) {
         return fs.readdirSync(srcdir);
@@ -71,7 +87,7 @@
         if(stat.isDirectory()) {
           return; // ディレクトリはもちろん対象外
         }
-        console.log(`(replacer.js) operating filepath: ${filepath}`);
+        Log.i(`operating filepath: ${filepath}`);
         return Promise.resolve().then(()=>{
           return fs.readFileSync(filepath)
         }).then(buf=>{
@@ -97,7 +113,7 @@
       str = str.replace(/ (href|src)=".\/(["]+)"/g, (a0, a1, a2)=>a2.includes(':') ? ` ${a1}="./${a2.replace(/:/g, '/')}"`: a0);
       return str;
     })['catch'](e=>{
-      console.error(`Op_relativize error: ${e ? e.message || e: 'unknown'}`);
+      Log.e(`Op_relativize error: ${e ? e.message || e: 'unknown'}`);
       throw e;
     });
   }
@@ -131,7 +147,7 @@
         // キーワードはアンド検索なので、全てが見つかるもののみを残す
         return kwd.filter(kw=>!new RegExp(kw, 'i').test(s)).length == 0;
       });
-      // console.log('Op_add can?', can, 'pos?', pos, 'add?', add);
+      Log.d('Op_add can?', can, 'pos?', pos, 'add?', add);
       if(can.length > 1) {
         throw `Too many matched elements for tag: ${tag} and keywords: ${kwd.join(',')} (n=${can.length})`;
       }
@@ -144,7 +160,7 @@
       can.forEach(el => el.remove());
       return replaceHTML(str, pos, doc[pos].innerHTML);
     })['catch'](e=>{
-      console.error(`Op_add error: ${e ? e.message || e: 'unknown'}`);
+      Log.e(`Op_add error: ${e ? e.message || e: 'unknown'}`);
       throw e;
     });
   }
@@ -177,23 +193,16 @@
         // キーワードはアンド検索なので、全てが見つかるもののみを残す
         return kwd.filter(kw=>!new RegExp(kw, 'i').test(s)).length == 0;
       });
-      // console.log('Op_del can?', can, 'pos?', pos);
+      Log.d('Op_del can?', can, 'pos?', pos);
       if(can.length > 1) {
         throw `Too many matched elements for tag: ${tag} and keywords: ${kwd.join(',')} (n=${can.length})`;
       }
       can.forEach(el => el.remove());
       return replaceHTML(str, pos, doc[pos].innerHTML);
     })['catch'](e=>{
-      console.error(`Op_del error: ${e ? e.message || e: 'unknown'}`);
+      Log.e(`Op_del error: ${e ? e.message || e: 'unknown'}`);
       throw e;
     });
-  }
-  
-  async function Op_mkDdir(pathname) {
-    const pathdir = path.resolve(opdir, pathname);
-    return new Promise((rsl, rej)=>fs.mkdir(pathdir, { recursive: true }, (er, rd)=>{ 
-      if(er) console.log('[Warn](Op_mkDir)', er); rsl();
-    }));
   }
   
   function replaceHTML(str, pos, alt) {
@@ -201,6 +210,15 @@
     const idx_1 = str.substring(idx_0 + `<${pos}`.length).indexOf('>') + idx_0 + `<${pos}`.length + 1;
     const idx_2 = str.indexOf(`</${pos}>`);
     return `${str.substring(0, idx_1)}\n${alt.trim().split("\n").filter(t=>!!t.trim()).map(t=>`    ${t.trim()}`).join("\n")}\n  ${str.substring(idx_2)}`;
+  }
+  
+  // ---
+  function outLog() {
+    return console.log.apply(console, _getArgs(arguments));
+  }
+  function _getArgs(a) {
+    const args = Array.from(a);
+    return [`${new Date().toISOString()} - (replacer.js)`].concat(args);
   }
   
 })(module.exports = { });
